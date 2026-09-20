@@ -1,40 +1,37 @@
 # QuantumTrade — Virtual Stock Trading Platform
 
-A modern, high-performance **Virtual Stock Trading Platform** designed for paper trading, market simulation, and portfolio management. Users can explore 10 major stocks, navigate through historical test market data using an interactive **Date & Time Controller**, execute virtual Buy and Sell orders, manage portfolio holdings, track realized & unrealized P&L in real-time, and review complete transaction audit logs.
+[![Vercel Deployment](https://img.shields.io/badge/Deployment-Live%20on%20Vercel-success?style=for-the-badge&logo=vercel)](https://virtual-stock-trading-alpha.vercel.app)
+[![React](https://img.shields.io/badge/Frontend-React%2018%20%2B%20TypeScript-blue?style=for-the-badge&logo=react)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/UI-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
 
-> **Note**: This is a virtual simulation platform. There are **no real-money transactions** and no real assets involved.
+A modern, full-stack **Virtual Stock Trading Platform** built for market simulation, time-travel analysis, and virtual portfolio management. The application simulates the US stock market across 10 major companies using 30-minute interval CSV test data covering 15 trading days.
+
+### 🔗 Quick Links
+- **🚀 Live Application (Hosted on Vercel)**: **[https://virtual-stock-trading-alpha.vercel.app](https://virtual-stock-trading-alpha.vercel.app)**
+- **📁 GitHub Repository**: **[https://github.com/mohdshiyab/AIContentMatic-task](https://github.com/mohdshiyab/AIContentMatic-task)**
+- **⚡ Live API Health Check**: **[https://virtual-stock-trading-alpha.vercel.app/api/stocks](https://virtual-stock-trading-alpha.vercel.app/api/stocks)**
+
+> **Note**: This is a virtual simulation platform designed for paper trading. There are **no real-money transactions** and no real assets involved.
 
 ---
 
-## Key Features
+## Requirements & Implementation Matrix
 
-- **10 Representative Stocks Watchlist**: AAPL, MSFT, NVDA, GOOGL, AMZN, META, TSLA, JPM, V, WMT across Technology, Semiconductors, Financial Services, Consumer Discretionary, and Consumer Staples sectors.
-- **CSV-Based Market Data & Time Travel**:
-  - Test market data covering **15 trading days** at **30-minute intervals** (09:30 AM to 04:00 PM EST, 210 intervals per stock, 2,100 total OHLCV records).
-  - **Time Travel & Playback Controller**:
-    - Scrub through time with a timeline slider.
-    - Select any specific date and 30-minute interval from a dropdown picker.
-    - Step forward/backward by 30 minutes (`+30m`, `-30m`) or by 1 full day (`+1D`, `-1D`).
-    - **Auto-Play Simulation Mode**: Click "Play" to watch market prices update across the platform with selectable speeds (`1x`, `2x`, `5x`, `10x`).
-- **Interactive Stock Detail & Charting**:
-  - Historical Price Area chart rendered dynamically up to the currently selected simulation time (preventing future peek).
-  - Key statistics: Day Open, Interval High, Interval Low, Interval Volume.
-  - Sector tags and company profiles.
-- **Virtual Paper Trading (Buy / Sell Orders)**:
-  - Starting virtual cash capital: **\$100,000.00 USD**.
-  - Orders executed at the **exact selected simulation timestamp's market price**.
-  - Real-time cost/proceeds calculation, instant max-affordable shares calculator, and 25%/50%/75%/100% quick presets.
-  - Safeguards against overdrafting cash balance or selling more shares than owned.
-- **Portfolio Management & Real-Time P&L Tracking**:
-  - Dynamic valuation of all holdings based on current simulation timestamp prices.
-  - Tracks **Unrealized P&L** (\$ and %) on active positions.
-  - Tracks **Realized P&L** (\$) computed from closed/partially closed positions using weighted average cost basis.
-  - Interactive **Asset Allocation Donut Chart** (Cash vs. Equities breakdown).
-- **Execution History & Audit Trail**:
-  - Chronological log of all executed trades with Order ID, Type (`BUY`/`SELL`), Execution Price, Shares, Total Value, Realized P&L, and Simulation Timestamp.
-  - Filterable by stock ticker and trade type.
-- **One-Click Account Reset**:
-  - Easily reset virtual funds to \$100,000.00 and wipe trade history to test fresh trading strategies.
+| Requirement | Implementation Details | Status |
+| :--- | :--- | :---: |
+| **View Available Stocks** | 10 major stocks (`AAPL`, `MSFT`, `NVDA`, `GOOGL`, `AMZN`, `META`, `TSLA`, `JPM`, `V`, `WMT`) across Technology, Semiconductors, Consumer Discretionary, Financial Services, and Consumer Staples. | ✅ Complete |
+| **Changing Stock Prices** | Real-time prices dynamically change according to the simulation clock, with visual green/red flash animations and day/interval percentage indicators. | ✅ Complete |
+| **Time-Travel by Date & Time** | Display stock price based on selected date & time using CSV data. Features timeline scrub slider, dropdown date/time picker, step buttons (`+30m`, `-30m`, `+1D`, `-1D`), and Auto-Play simulation mode (`1x`, `2x`, `5x`, `10x`). | ✅ Complete |
+| **Interactive Price Charts** | Detailed historical Area Chart rendered up to the selected simulation timestamp without leaking future data. | ✅ Complete |
+| **Buy & Sell with Virtual Money** | Trade execution at the exact simulation timestamp's price with **\$100,000.00** starting virtual cash, real-time cost calculation, and overdraft safeguards. | ✅ Complete |
+| **Portfolio Management** | Dynamic tracking of Total Net Worth, Cash Balance, Invested Capital, active holdings, and an interactive **Asset Allocation Donut Chart**. | ✅ Complete |
+| **Track Profit / Loss (P&L)** | Computes both **Unrealized P&L** (\$ and %) on open positions and **Realized P&L** (\$) on closed/partially closed positions using weighted average cost basis. | ✅ Complete |
+| **Transaction History** | Chronological audit log with Order ID, Type (`BUY`/`SELL`), Shares, Execution Price, Total Value, Realized P&L, and simulation timestamps. Filterable by ticker and order type. | ✅ Complete |
+| **CSV Test Market Data** | 10 stocks $\times$ 15 trading days $\times$ 14 intervals/day = **2,100 OHLCV records** stored in `data/csv/` and indexed in SQLite `market_data.db`. | ✅ Complete |
+| **No Auth / Single User** | Predefined virtual account (`Demo Trader`) with zero registration/login hurdles for immediate testing. | ✅ Complete |
+| **One-Click Account Reset** | Easily resets funds to \$100,000.00 and clears positions/trades to test new trading strategies. | ✅ Complete |
 
 ---
 
@@ -44,7 +41,7 @@ A modern, high-performance **Virtual Stock Trading Platform** designed for paper
 [ Frontend: React 18 + TypeScript + Vite + Tailwind CSS + Recharts + Lucide ]
                                  │
                                  ▼ REST API (JSON)
-[ Backend: Python 3.13 + FastAPI + Uvicorn + Pydantic ]
+[ Backend: Python 3.12/3.13 + FastAPI + SQLite Serverless Handler ]
                                  │
             ┌────────────────────┴────────────────────┐
             ▼                                         ▼
@@ -54,9 +51,9 @@ A modern, high-performance **Virtual Stock Trading Platform** designed for paper
 - transactions audit log
 ```
 
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide React icons, Recharts (AreaChart, PieChart).
-- **Backend**: FastAPI, Uvicorn, Pydantic, SQLite3 (standard library), HTTPX.
-- **Unified Delivery**: The FastAPI server serves both the RESTful API endpoints at `/api/...` and the compiled single-page application at `/`.
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide React icons, Recharts (Interactive Area & Donut charts).
+- **Backend**: FastAPI, Python, Pydantic, SQLite3 (with serverless `/tmp` fallback for zero-write-error hosting on Vercel).
+- **Cloud Hosting**: Deployed on **Vercel** with edge routing (`vercel.json`), serverless Python functions (`api/index.py`), and CDN static caching.
 
 ---
 
@@ -64,6 +61,9 @@ A modern, high-performance **Virtual Stock Trading Platform** designed for paper
 
 ```
 virtual-stock-trading/
+├── api/
+│   ├── index.py                       # Vercel serverless Python handler
+│   └── requirements.txt               # Vercel dependencies
 ├── data/
 │   ├── csv/                           # Individual & consolidated CSV files
 │   │   ├── AAPL.csv
@@ -77,13 +77,13 @@ virtual-stock-trading/
 │   │   ├── V.csv
 │   │   ├── WMT.csv
 │   │   └── all_stocks_market_data.csv # 2,100 OHLCV records
-│   ├── market_data.db                 # SQLite database loaded from CSVs
+│   ├── market_data.db                 # SQLite database seeded from CSVs
 │   └── generate_market_data.py        # Generates CSVs and seeds SQLite
 ├── backend/
 │   ├── app/
 │   │   ├── __init__.py
-│   │   ├── main.py                    # FastAPI entry, CORS, static file mount
-│   │   ├── database.py                # SQLite connection & schema helpers
+│   │   ├── main.py                    # FastAPI app, CORS, routers, static mount
+│   │   ├── database.py                # SQLite connection & serverless fallback
 │   │   ├── models.py                  # Pydantic schemas
 │   │   └── routers/
 │   │       ├── stocks.py              # /api/stocks, /api/stocks/{sym}/history
@@ -92,7 +92,7 @@ virtual-stock-trading/
 │   │       ├── history.py             # /api/transactions
 │   │       └── simulation.py          # /api/simulation/timestamps, /reset
 │   ├── requirements.txt
-│   └── test_backend.py                # Automated API & trading logic tests
+│   └── test_backend.py                # Automated backend & trading logic test suite
 ├── frontend/
 │   ├── src/
 │   │   ├── context/
@@ -109,11 +109,12 @@ virtual-stock-trading/
 │   │   ├── types/index.ts             # TypeScript definitions
 │   │   ├── App.tsx
 │   │   └── main.tsx
-│   ├── dist/                          # Production build served by FastAPI
+│   ├── dist/                          # Production bundle served by FastAPI / Vercel
 │   ├── package.json
 │   ├── vite.config.ts
 │   └── tailwind.config.js
-├── run.py                             # Root runner: starts unified server
+├── vercel.json                        # Vercel deployment configuration
+├── run.py                             # Root runner for local unified hosting
 ├── run_app.bat                        # Windows 1-click launcher
 ├── run_app.ps1                        # PowerShell 1-click launcher
 └── README.md                          # Documentation
@@ -121,13 +122,9 @@ virtual-stock-trading/
 
 ---
 
-## Quick Start & Running the Platform
+## Running Locally
 
-### Prerequisites
-- Python 3.10+ (tested on Python 3.13)
-- Node.js 18+ (tested on Node 24)
-
-### Option 1: 1-Click Windows Launch (Recommended)
+### Option 1: One-Click Windows Launcher (Recommended)
 Double-click `run_app.bat` or run in PowerShell:
 ```powershell
 .\run_app.ps1
@@ -135,28 +132,24 @@ Double-click `run_app.bat` or run in PowerShell:
 
 ### Option 2: Run with Python directly
 ```bash
-# 1. Install backend requirements
+# 1. Install backend dependencies
 pip install -r backend/requirements.txt
 
 # 2. Start the unified application
 python run.py
 ```
-Open your browser and navigate to:
-**[http://127.0.0.1:8000](http://127.0.0.1:8000)**
-
-Interactive API Swagger documentation is available at:
-**[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)**
+Open **[http://127.0.0.1:8000](http://127.0.0.1:8000)** in your web browser.
 
 ---
 
-## How to Test & Verify
+## Automated Testing
 
 Run the automated backend test suite:
 ```bash
 cd backend
 python test_backend.py
 ```
-This tests:
+**Tests Verified**:
 1. Timestamp extraction (210 intervals across 15 trading days).
 2. Quotes calculation at simulation time with day open and interval changes.
 3. Historical price chart generation without future peek.
@@ -202,24 +195,6 @@ When recording your demonstration video, follow this recommended sequence:
 
 ---
 
-## Pushing to GitHub
-
-To push the project to your GitHub account:
-
-```bash
-# In the project directory:
-git init
-git add .
-git commit -m "Initial commit: Virtual Stock Trading Platform"
-
-# Create a new repository on GitHub (e.g., virtual-stock-trading)
-# Then link and push:
-git remote add origin https://github.com/<YOUR_USERNAME>/virtual-stock-trading.git
-git branch -M main
-git push -u origin main
-```
-
----
-
-## License
-MIT License. Built for assessment / educational simulation purposes.
+## Author & License
+- **Author**: Mohammad Shiyab ([@mohdshiyab](https://github.com/mohdshiyab))
+- **License**: MIT License
