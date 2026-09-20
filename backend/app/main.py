@@ -25,6 +25,30 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from urllib.parse import parse_qs, urlencode
+
+class VercelPathMiddleware:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            query_string = scope.get("query_string", b"").decode("utf-8")
+            if "__path__" in query_string:
+                params = parse_qs(query_string, keep_blank_values=True)
+                if "__path__" in params:
+                    path_val = params.pop("__path__")[0]
+                    scope["path"] = f"/api/{path_val.lstrip('/')}"
+                    scope["raw_path"] = scope["path"].encode("utf-8")
+                    scope["query_string"] = urlencode(params, doseq=True).encode("utf-8")
+        await self.app(scope, receive, send)
+
+app.add_middleware(VercelPathMiddleware)
+
+@app.get("/api", tags=["System"])
+def api_root():
+    return {"status": "ok", "app": "Virtual Stock Trading Platform", "mode": "Vercel Serverless"}
+
 # Mount API Routers
 app.include_router(stocks.router)
 app.include_router(portfolio.router)

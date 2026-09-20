@@ -1,9 +1,2 @@
-services:
-  - type: web
-    name: quantumtrade-virtual-stock-trading
-    runtime: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: python run.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
+# Render configuration (optional)
+# For Render deployment, see README.md
